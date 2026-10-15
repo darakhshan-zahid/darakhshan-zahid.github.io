@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Sales Analytics Dashboard | Darakhshan Zahid</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#050507">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#02021c;--panel:#080a3a;--line:#1d2478;--g:#ff5a1a;--g2:#ffd23c;--text:#f2f4ff;--muted:#9fa8dc}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 85% 0%,rgba(255,90,26,.13),transparent 70%),linear-gradient(rgba(255,90,26,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,90,26,.045) 1px,transparent 1px);background-size:auto,56px 56px,56px 56px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.back{display:inline-flex;gap:8px;align-items:center;margin:28px 0 0;color:var(--g2);font-weight:600;font-size:.92rem;padding:8px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.2s}
+.back:hover{border-color:var(--g);box-shadow:0 0 18px rgba(255,90,26,.3)}
+header{text-align:center;padding:50px 0 30px}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--g);text-shadow:0 0 26px rgba(255,90,26,.45)}
+header p{color:var(--muted);font-size:1.05rem;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:12px;font-weight:700;background:var(--g);color:#1a0600;box-shadow:0 0 28px rgba(255,90,26,.35);transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,90,26,.55)}
+.btn svg{width:20px;height:20px;fill:currentColor}
+h2{font-size:1.7rem;font-weight:700;margin:56px 0 24px}
+h2:after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:10px;background:var(--g);box-shadow:0 0 14px var(--g)}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:26px;transition:.25s}
+.page:hover{border-color:var(--g);box-shadow:0 0 34px rgba(255,90,26,.16)}
+.page img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
+.page h3{margin:16px 4px 4px;font-size:1.2rem;color:var(--g2)}
+.page p{margin:0 4px 6px;color:var(--muted);font-size:.95rem}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:12px;padding:16px 18px}
+.kpi b{display:block;font-size:1.5rem;color:var(--g);font-weight:800;line-height:1.2}
+.kpi span{color:var(--muted);font-size:.85rem}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 26px}
+.ins{padding:16px 0;border-bottom:1px solid var(--line)}
+.ins:last-child{border:0}
+.ins h4{font-size:.98rem;color:var(--g2);margin-bottom:3px}
+.ins p{color:var(--muted);font-size:.93rem}
+.ins p b{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{padding:8px 18px;border-radius:99px;border:1px solid var(--g);color:var(--g2);font-weight:600;font-size:.88rem;background:rgba(255,90,26,.07)}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;list-style:none}
+.feat li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px 12px 42px;position:relative;font-size:.93rem}
+.feat li:before{content:"✔";position:absolute;left:16px;color:var(--g);font-weight:700}
+.rec{counter-reset:r}
+.rec .ins{padding-left:46px;position:relative}
+.rec .ins:before{counter-increment:r;content:counter(r);position:absolute;left:0;top:16px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#1a0600;font-weight:800;font-size:.85rem}
+footer{text-align:center;padding:50px 0 34px;color:var(--muted);font-size:.85rem}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:50;cursor:zoom-out;padding:20px}
+#lb.on{display:grid}
+#lb img{max-width:96vw;max-height:92vh;border-radius:10px;box-shadow:0 0 70px rgba(255,90,26,.25)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html#projects">← Back to Portfolio</a>
+
+  <header>
+    <h1>📦 <span>Amazon Sales</span> Analytics</h1>
+    <p>Interactive Power BI Dashboard</p>
+    <a class="btn" href="https://github.com/darakhshan-zahid/amazon-sales-analytics-project" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>View GitHub Repository</a>
+  </header>
+
+  <h2>📋 Dashboard Overview</h2>
+  <div class="page">
+    <img src="images/amazon-dashboard.jpg" alt="Amazon Sales Analytics Dashboard">
+    <h3>Amazon Sales Analytics Dashboard</h3>
+    <p>Order volume, revenue trends and sales performance from 2020 to 2024, with revenue by payment method, order status, discounts, category, country and a yearly &amp; monthly revenue trend. Slicers for year, month, category and country.</p>
+  </div>
+
+  <h2>🔑 Key Metrics</h2>
+  <div class="kpis">
+    <div class="kpi"><b>100K</b><span>Total Orders</span></div>
+    <div class="kpi"><b>43K</b><span>Total Customers</span></div>
+    <div class="kpi"><b>91.83M</b><span>Total Revenue</span></div>
+    <div class="kpi"><b>300K</b><span>Total Quantity</span></div>
+    <div class="kpi"><b>2K</b><span>Total Sellers</span></div>
+    <div class="kpi"><b>75%</b><span>Orders Delivered (75K)</span></div>
+    <div class="kpi"><b>70%</b><span>Orders from United States</span></div>
+    <div class="kpi"><b>34.98%</b><span>Revenue via Credit Card</span></div>
+  </div>
+
+  <h2>📌 Key Business Insights</h2>
+  <div class="box">
+    <div class="ins"><h4>1. Overall Performance</h4><p>From 2020 to 2024 the business handled <b>100K orders from 43K customers</b>, selling <b>300K units and generating 91.83M in revenue</b> through 2K sellers.</p></div>
+    <div class="ins"><h4>2. Revenue Trend</h4><p>Monthly revenue stayed in a tight band of <b>about 1.34M to 1.64M across all five years</b>, showing stable demand but little sustained growth.</p></div>
+    <div class="ins"><h4>3. Category Performance</h4><p>All six categories are close: <b>Electronics leads at 15.6M</b>, while Sports &amp; Outdoors, Books, Clothing, Toys &amp; Games and Home &amp; Kitchen each earn between 15.2M and 15.3M.</p></div>
+    <div class="ins"><h4>4. Geographic Concentration</h4><p>The <b>United States generates 70K of the 100K orders (70%)</b>, followed by India (15K), Canada (6K), the United Kingdom (5K) and Australia (4K).</p></div>
+    <div class="ins"><h4>5. Payment Methods</h4><p><b>Credit Card brings 34.98% of revenue</b> and Debit Card 20.19%. UPI (15.13%) and Amazon Pay (14.92%) follow, while <b>Cash on Delivery is only 4.92%</b>.</p></div>
+    <div class="ins"><h4>6. Order Status</h4><p><b>75K orders were delivered</b>, 15K are shipped, 4K pending, and <b>3K returned and 3K cancelled</b> (about 6% combined).</p></div>
+    <div class="ins"><h4>7. Discount Impact</h4><p><b>43.3% of revenue came from orders with no discount</b>, while the rest came from discount levels between 5% and 30%.</p></div>
+    <div class="ins"><h4>8. Customer Value</h4><p>On average each customer placed about <b>2.3 orders</b>, and the average order value works out to roughly <b>918</b> (calculated from the dashboard totals).</p></div>
+  </div>
+
+  <h2>💡 Business Recommendations</h2>
+  <div class="box rec">
+    <div class="ins"><h4>Grow Beyond the US Market</h4><p>India, Canada, the UK and Australia have far fewer orders than the US, so targeted marketing there could add growth.</p></div>
+    <div class="ins"><h4>Reduce Returns, Cancellations and Pending Orders</h4><p>Find the main causes and improve product listings, stock checks and fulfilment speed.</p></div>
+    <div class="ins"><h4>Use Targeted Discounts</h4><p>Since 43% of revenue already comes from full-price orders, test selective offers instead of broad discounts to protect margins.</p></div>
+    <div class="ins"><h4>Break the Revenue Plateau</h4><p>Use bundles, cross-selling and seasonal campaigns across the six evenly performing categories to lift monthly revenue above its current range.</p></div>
+  </div>
+
+  <h2>🛠 Tools Used</h2>
+  <div class="chips"><span>Power BI</span><span>DAX</span><span>Data Cleaning</span><span>Data Visualization</span></div>
+
+  <h2>⭐ Key Features</h2>
+  <ul class="feat">
+    <li>Executive KPI cards</li>
+    <li>Revenue by payment method</li>
+    <li>Order status breakdown</li>
+    <li>Discount vs revenue analysis</li>
+    <li>Category revenue and orders</li>
+    <li>Orders by country</li>
+    <li>Yearly &amp; monthly revenue trend</li>
+    <li>Slicers for year, month, category and country</li>
+  </ul>
+
+  <footer>© 2026 Darakhshan Zahid · Data Analyst</footer>
+</div>
+
+<div id="lb"><img id="lbimg" alt=""></div>
+<script>
+const lb=document.getElementById('lb'),li=document.getElementById('lbimg');
+document.querySelectorAll('.page img').forEach(i=>i.onclick=()=>{li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+</script>
+</body>
+</html>

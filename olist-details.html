@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olist E-Commerce Analysis - 4 Pages | Darakhshan Zahid</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#050507">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#10001a;--panel:#04190f;--line:#0f3a22;--g:#00ff1a;--g2:#39ff6a;--text:#eefcf1;--muted:#8fb09a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 85% 0%,rgba(0,255,26,.13),transparent 70%),linear-gradient(rgba(0,255,26,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,26,.045) 1px,transparent 1px);background-size:auto,56px 56px,56px 56px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.back{display:inline-flex;gap:8px;align-items:center;margin:28px 0 0;color:var(--g2);font-weight:600;font-size:.92rem;padding:8px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.2s}
+.back:hover{border-color:var(--g);box-shadow:0 0 18px rgba(0,255,26,.3)}
+header{text-align:center;padding:50px 0 30px}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--g);text-shadow:0 0 26px rgba(0,255,26,.45)}
+header p{color:var(--muted);font-size:1.05rem;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:12px;font-weight:700;background:var(--g);color:#021a0a;box-shadow:0 0 28px rgba(0,255,26,.35);transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,255,26,.55)}
+.btn svg{width:20px;height:20px;fill:currentColor}
+h2{font-size:1.7rem;font-weight:700;margin:56px 0 24px}
+h2:after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:10px;background:var(--g);box-shadow:0 0 14px var(--g)}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:26px;transition:.25s}
+.page:hover{border-color:var(--g);box-shadow:0 0 34px rgba(0,255,26,.16)}
+.page img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
+.page h3{margin:16px 4px 4px;font-size:1.2rem;color:var(--g2)}
+.page p{margin:0 4px 6px;color:var(--muted);font-size:.95rem}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:12px;padding:16px 18px}
+.kpi b{display:block;font-size:1.5rem;color:var(--g);font-weight:800;line-height:1.2}
+.kpi span{color:var(--muted);font-size:.85rem}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 26px}
+.ins{padding:16px 0;border-bottom:1px solid var(--line)}
+.ins:last-child{border:0}
+.ins h4{font-size:.98rem;color:var(--g2);margin-bottom:3px}
+.ins p{color:var(--muted);font-size:.93rem}
+.ins p b{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{padding:8px 18px;border-radius:99px;border:1px solid var(--g);color:var(--g2);font-weight:600;font-size:.88rem;background:rgba(0,255,26,.07)}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;list-style:none}
+.feat li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px 12px 42px;position:relative;font-size:.93rem}
+.feat li:before{content:"✔";position:absolute;left:16px;color:var(--g);font-weight:700}
+.rec{counter-reset:r}
+.rec .ins{padding-left:46px;position:relative}
+.rec .ins:before{counter-increment:r;content:counter(r);position:absolute;left:0;top:16px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#021a0a;font-weight:800;font-size:.85rem}
+footer{text-align:center;padding:50px 0 34px;color:var(--muted);font-size:.85rem}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:50;cursor:zoom-out;padding:20px}
+#lb.on{display:grid}
+#lb img{max-width:96vw;max-height:92vh;border-radius:10px;box-shadow:0 0 70px rgba(0,255,26,.25)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html#projects">← Back to Portfolio</a>
+
+  <header>
+    <h1>🛒 <span>Olist E-Commerce</span> Sales &amp; Performance</h1>
+    <p>Complete 4-Page Power BI Dashboard</p>
+    <a class="btn" href="https://github.com/darakhshan-zahid/Olist-Brazilian-E-Commerce-Analysis" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>View GitHub Repository</a>
+  </header>
+
+  <h2>📋 All 4 Dashboard Pages</h2>
+
+  <div class="page">
+    <img src="images/olist-overview.jpg" alt="Executive Overview">
+    <h3>Page 1: Executive Overview</h3>
+    <p>Total customers, orders, revenue, average order value and review score, with payment mix, order status, on-time delivery, orders by state and the monthly revenue trend.</p>
+  </div>
+  <div class="page">
+    <img src="images/olist-sales.jpg" alt="Sales and Product Performance">
+    <h3>Page 2: Sales &amp; Product Performance</h3>
+    <p>Category revenue, items sold, price distribution, top products and the top 10 sellers by revenue.</p>
+  </div>
+  <div class="page">
+    <img src="images/olist-customer.jpg" alt="Customer and Delivery Analysis">
+    <h3>Page 3: Customer &amp; Delivery Analysis</h3>
+    <p>On-time vs late delivery, delivery status by state, repeat vs one-time customers and order fulfilment stages.</p>
+  </div>
+  <div class="page">
+    <img src="images/olist-insights.jpg" alt="Insights and Recommendations">
+    <h3>Page 4: Insights &amp; Recommendations</h3>
+    <p>Ten key business findings and four recommendations drawn from sales, customers, products and delivery performance.</p>
+  </div>
+
+  <h2>🔑 Key Metrics</h2>
+  <div class="kpis">
+    <div class="kpi"><b>96K</b><span>Total Customers</span></div>
+    <div class="kpi"><b>99K</b><span>Total Orders</span></div>
+    <div class="kpi"><b>R$13.59M</b><span>Total Revenue</span></div>
+    <div class="kpi"><b>136.68</b><span>Average Order Value</span></div>
+    <div class="kpi"><b>4.09</b><span>Average Review Score</span></div>
+    <div class="kpi"><b>113K</b><span>Total Items Sold</span></div>
+    <div class="kpi"><b>33K</b><span>Unique Products</span></div>
+    <div class="kpi"><b>120.7</b><span>Average Product Price</span></div>
+    <div class="kpi"><b>97.02%</b><span>Orders Delivered</span></div>
+    <div class="kpi"><b>89.15%</b><span>Delivered On Time</span></div>
+    <div class="kpi"><b>12.5 days</b><span>Average Delivery Time</span></div>
+    <div class="kpi"><b>3.12%</b><span>Repeat Customers</span></div>
+  </div>
+
+  <h2>📌 Key Business Insights</h2>
+  <div class="box">
+    <div class="ins"><h4>1. Overall Sales Performance</h4><p>The platform generated <b>R$13.59M in revenue from about 99K orders and 96K customers</b>.</p></div>
+    <div class="ins"><h4>2. Revenue Trend</h4><p>Revenue stayed relatively stable in most months, with a <b>noticeable peak around November 2017 at R$1.01M</b>.</p></div>
+    <div class="ins"><h4>3. Top-Performing Categories</h4><p><b>Watches &amp; Gifts (R$1.21M), Sports &amp; Leisure (R$0.99M) and Toys (R$0.48M)</b> were the highest revenue categories.</p></div>
+    <div class="ins"><h4>4. Geographic Performance</h4><p><b>São Paulo (SP)</b> generated the most orders, making it the key market and a priority region for growth.</p></div>
+    <div class="ins"><h4>5. Payment Performance</h4><p>Payment methods showed a <b>relatively balanced distribution</b>, with no single method dominating volume or revenue.</p></div>
+    <div class="ins"><h4>6. Order Fulfillment</h4><p>About <b>97% of orders were successfully delivered</b>, showing strong fulfillment performance.</p></div>
+    <div class="ins"><h4>7. Delivery Performance</h4><p>Around <b>89% of orders arrived on time</b>, 7% were late and 2% were not delivered.</p></div>
+    <div class="ins"><h4>8. Customer Retention</h4><p>Only <b>3K repeat customers against 93K one-time customers</b>, a big opportunity to improve retention.</p></div>
+    <div class="ins"><h4>9. Average Delivery Time</h4><p>The average delivery time was about <b>12 days</b>, but it varied a lot between states.</p></div>
+    <div class="ins"><h4>10. States with Longer Delivery Times</h4><p><b>RR recorded about 29 days</b>, followed by PA at 23 days and MA and SE at about 21 days. These regions need a logistics review.</p></div>
+  </div>
+
+  <h2>💡 Business Recommendations</h2>
+  <div class="box rec">
+    <div class="ins"><h4>Improve Customer Retention</h4><p>Introduce loyalty programs and personalized offers to increase repeat purchases.</p></div>
+    <div class="ins"><h4>Optimize Regional Delivery</h4><p>Investigate logistics performance in RR, PA, MA and SE to reduce delivery times.</p></div>
+    <div class="ins"><h4>Focus on High-Performing Categories</h4><p>Prioritize marketing and inventory for Watches &amp; Gifts, Sports &amp; Leisure, and Toys.</p></div>
+    <div class="ins"><h4>Reduce Late Deliveries</h4><p>Identify the main causes of late orders and work with logistics partners to improve on-time delivery.</p></div>
+  </div>
+
+  <h2>🛠 Tools Used</h2>
+  <div class="chips"><span>Power BI</span><span>DAX</span><span>Data Modeling</span><span>SQL</span><span>Python</span></div>
+
+  <h2>⭐ Key Features</h2>
+  <ul class="feat">
+    <li>Executive KPI overview</li>
+    <li>Revenue trend analysis</li>
+    <li>Category and product performance</li>
+    <li>Top seller analysis</li>
+    <li>Delivery performance by state</li>
+    <li>Repeat vs one-time customers</li>
+    <li>Order fulfilment tracking</li>
+    <li>Interactive slicers and page navigation</li>
+  </ul>
+
+  <footer>© 2026 Darakhshan Zahid · Data Analyst</footer>
+</div>
+
+<div id="lb"><img id="lbimg" alt=""></div>
+<script>
+const lb=document.getElementById('lb'),li=document.getElementById('lbimg');
+document.querySelectorAll('.page img').forEach(i=>i.onclick=()=>{li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Sales Analysis Dashboard | Darakhshan Zahid</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#050507">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#071050;--panel:#0d1a7a;--line:#2a4fc4;--g:#3fa8ff;--g2:#a6d6ff;--text:#f4f8ff;--muted:#aec3f2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 420px at 85% 0%,rgba(63,168,255,.13),transparent 70%),linear-gradient(rgba(63,168,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(63,168,255,.045) 1px,transparent 1px);background-size:auto,56px 56px,56px 56px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.back{display:inline-flex;gap:8px;align-items:center;margin:28px 0 0;color:var(--g2);font-weight:600;font-size:.92rem;padding:8px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.2s}
+.back:hover{border-color:var(--g);box-shadow:0 0 18px rgba(63,168,255,.3)}
+header{text-align:center;padding:50px 0 30px}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--g);text-shadow:0 0 26px rgba(63,168,255,.45)}
+header p{color:var(--muted);font-size:1.05rem;margin-bottom:26px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:12px;font-weight:700;background:var(--g);color:#04103a;box-shadow:0 0 28px rgba(63,168,255,.35);transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(63,168,255,.55)}
+.btn svg{width:20px;height:20px;fill:currentColor}
+h2{font-size:1.7rem;font-weight:700;margin:56px 0 24px}
+h2:after{content:"";display:block;width:56px;height:4px;border-radius:4px;margin-top:10px;background:var(--g);box-shadow:0 0 14px var(--g)}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:26px;transition:.25s}
+.page:hover{border-color:var(--g);box-shadow:0 0 34px rgba(63,168,255,.16)}
+.page img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);cursor:zoom-in}
+.page h3{margin:16px 4px 4px;font-size:1.2rem;color:var(--g2)}
+.page p{margin:0 4px 6px;color:var(--muted);font-size:.95rem}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--g);border-radius:12px;padding:16px 18px}
+.kpi b{display:block;font-size:1.5rem;color:var(--g);font-weight:800;line-height:1.2}
+.kpi span{color:var(--muted);font-size:.85rem}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 26px}
+.ins{padding:16px 0;border-bottom:1px solid var(--line)}
+.ins:last-child{border:0}
+.ins h4{font-size:.98rem;color:var(--g2);margin-bottom:3px}
+.ins p{color:var(--muted);font-size:.93rem}
+.ins p b{color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{padding:8px 18px;border-radius:99px;border:1px solid var(--g);color:var(--g2);font-weight:600;font-size:.88rem;background:rgba(63,168,255,.07)}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;list-style:none}
+.feat li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px 12px 42px;position:relative;font-size:.93rem}
+.feat li:before{content:"✔";position:absolute;left:16px;color:var(--g);font-weight:700}
+.rec{counter-reset:r}
+.rec .ins{padding-left:46px;position:relative}
+.rec .ins:before{counter-increment:r;content:counter(r);position:absolute;left:0;top:16px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#04103a;font-weight:800;font-size:.85rem}
+footer{text-align:center;padding:50px 0 34px;color:var(--muted);font-size:.85rem}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;place-items:center;z-index:50;cursor:zoom-out;padding:20px}
+#lb.on{display:grid}
+#lb img{max-width:96vw;max-height:92vh;border-radius:10px;box-shadow:0 0 70px rgba(63,168,255,.25)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:14px 20px;font-weight:600;color:var(--g2);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"▸ ";color:var(--g)}
+details[open] summary:before{content:"▾ "}
+details[open] summary{border-bottom:1px solid var(--line)}
+pre{margin:0;padding:16px 20px;overflow-x:auto;font:.84rem/1.6 ui-monospace,Menlo,Consolas,monospace;color:#d6e6ff;background:#050b3a}
+.codebox{background:#050b3a;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 0 40px rgba(63,168,255,.10)}
+.codebar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;background:#0a1470;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tabs button{font:600 .85rem 'Poppins',sans-serif;padding:7px 20px;border-radius:9px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.tabs button.on{background:var(--g);border-color:var(--g);color:#04103a}
+.copy{font:600 .8rem 'Poppins',sans-serif;padding:7px 16px;border-radius:9px;border:1px solid var(--line);background:#071050;color:var(--g2);cursor:pointer;transition:.2s}
+.copy:hover{border-color:var(--g)}
+.codebox pre{max-height:540px;overflow:auto;padding:20px 22px;font:.84rem/1.65 ui-monospace,Menlo,Consolas,monospace;color:#d6e6ff;background:transparent}
+.tk-c{color:#6f86c9;font-style:italic}.tk-s{color:#ffd29a}.tk-k{color:#59b6ff;font-weight:600}.tk-f{color:#8be0c0}.tk-n{color:#ff9ec4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html#projects">← Back to Portfolio</a>
+
+  <header>
+    <h1>🍕 <span>Pizza Sales</span> Analysis</h1>
+    <p>SQL Analysis + Power BI Dashboard</p>
+    <a class="btn" href="https://github.com/darakhshan-zahid/Pizza-sales-analytics-Dashboard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>View GitHub Repository</a>
+  </header>
+
+  <h2>📋 Dashboard Overview</h2>
+  <div class="page">
+    <img src="images/pizza-dashboard.jpg" alt="Pizza Sales Analysis Dashboard">
+    <h3>Pizza Sales Analysis Dashboard</h3>
+    <p>Revenue, orders and pizzas sold, with daily and hourly order trends, sales by category and size, best and worst sellers, and slicers for order date and pizza category.</p>
+  </div>
+
+  <h2>🔑 Key Metrics</h2>
+  <div class="kpis">
+    <div class="kpi"><b>$340K</b><span>Total Revenue</span></div>
+    <div class="kpi"><b>8.9K</b><span>Total Orders</span></div>
+    <div class="kpi"><b>20.7K</b><span>Total Pizzas Sold</span></div>
+    <div class="kpi"><b>$38.4</b><span>Average Order Value</span></div>
+    <div class="kpi"><b>2.33</b><span>Average Pizzas Per Order</span></div>
+    <div class="kpi"><b>29.52%</b><span>Sales from Classic Pizzas</span></div>
+    <div class="kpi"><b>36.08%</b><span>Sales from Large (L) Size</span></div>
+    <div class="kpi"><b>1,433</b><span>Orders on Thursday (Busiest Day)</span></div>
+  </div>
+
+  <h2>📌 Key Business Insights</h2>
+  <div class="box">
+    <div class="ins"><h4>1. Overall Performance</h4><p>The business earned <b>$340K from 8.9K orders and 20.7K pizzas</b>, with an <b>average order value of $38.4</b> and 2.33 pizzas per order.</p></div>
+    <div class="ins"><h4>2. Busiest Days</h4><p><b>Thursday (1,433 orders) and Friday (1,427)</b> are the busiest days. Sunday (1,063) and Monday (1,025) are the slowest, roughly 28% below Thursday.</p></div>
+    <div class="ins"><h4>3. Peak Hours</h4><p>Orders peak twice a day: <b>around 12-1 PM (about 1,050 orders an hour) and 5-6 PM (about 1,000)</b>. They fall steadily after 8 PM and almost stop by 11 PM.</p></div>
+    <div class="ins"><h4>4. Category Performance</h4><p><b>Classic pizzas lead with 29.52% of sales</b> and about 6K pizzas sold. Supreme (24.13%), Veggie (23.48%) and Chicken (22.87%) are fairly balanced.</p></div>
+    <div class="ins"><h4>5. Size Performance</h4><p><b>Large pizzas bring 36.08% of sales</b>, followed by Medium (31.85%) and Small (30.55%). XL (1.44%) and XXL are almost negligible.</p></div>
+    <div class="ins"><h4>6. Best Sellers</h4><p><b>The Classic Deluxe (1,066), The Hawaiian (1,045) and The Pepperoni (1,019)</b> are the top sellers by pizzas sold.</p></div>
+    <div class="ins"><h4>7. Worst Seller</h4><p><b>The Brie Carre Pizza sold only 206</b>, about half of the next-lowest pizza (The Calabrese, 388).</p></div>
+    <div class="ins"><h4>8. Order Basket</h4><p>Customers buy <b>2.33 pizzas per order on average</b>, which leaves room to grow order value with combos and bundles.</p></div>
+  </div>
+
+  <h2>💡 Business Recommendations</h2>
+  <div class="box rec">
+    <div class="ins"><h4>Staff and Stock for Peak Hours</h4><p>Schedule more staff and prepare ingredients for the 12-1 PM and 5-6 PM rushes, especially on Thursdays and Fridays.</p></div>
+    <div class="ins"><h4>Boost Slow Days</h4><p>Use combo deals and offers on Sundays and Mondays to lift order volume.</p></div>
+    <div class="ins"><h4>Promote Top Sellers, Review the Weakest</h4><p>Feature Classic Deluxe, Hawaiian and Pepperoni in campaigns, and reconsider or reposition The Brie Carre Pizza.</p></div>
+    <div class="ins"><h4>Increase Basket Size</h4><p>Introduce bundles and family deals to raise pizzas per order, and simplify the menu by reviewing XL and XXL sizes.</p></div>
+  </div>
+
+  <h2>⚙️ Code &amp; Technical Implementation</h2>
+  <div class="codebox">
+    <div class="codebar">
+      <div class="tabs"><button class="on" type="button">SQL</button></div>
+      <button class="copy" id="copyBtn" type="button">Copy code</button>
+    </div>
+    <pre><code id="code">create database pizza_sales;
+
+# A. KPI's
+#1. Total Revenue
+select sum(total_price) as total_revenue from pizza_sales.data;
+
+#2. Average Order Value
+select sum(total_price) / count(distinct order_id) as Average_Order_Value from pizza_sales.data;
+
+#3. Total Pizza Sold
+select sum(quantity) as Total_Pizza_Sold from pizza_sales.data;
+
+#4. Total Orders
+select count(distinct order_id) as Total_Orders from pizza_sales.data;
+
+#5. Average Pizzas Per Order
+select cast(
+cast(sum(quantity) as decimal(10, 2)) /
+cast(count(distinct order_id) as decimal(10, 2)) as decimal(10, 2)
+) as Average_pizza_per_order
+from pizza_sales.data;
+
+#B. Daily Trend For Total Orders
+SELECT
+    DAYNAME(STR_TO_DATE(order_date, '%m/%d/%Y')) AS order_day,
+    COUNT(DISTINCT order_id) AS total_orders
+FROM pizza_sales.data
+GROUP BY DAYNAME(STR_TO_DATE(order_date, '%m/%d/%Y'));
+
+#C. Hourly Trend for Orders
+select hour(order_time) as order_hours,
+count(distinct order_id) as total_orders
+from pizza_sales.data
+group by hour(order_time)
+order by hour(order_time);
+
+#D. % of sales by Pizza Category
+select pizza_category, cast(sum(total_price) as decimal(10,2)) as total_revenue,
+cast(sum(total_price) * 100 / (select sum(total_price) from pizza_sales.data)
+as decimal(10,2)) as PCT from pizza_sales.data
+group by pizza_category;
+
+#E. % of sales by pizza size
+select pizza_size, cast(sum(total_price) as decimal(10,2)) as total_revenue,
+cast(sum(total_price) * 100 / (select sum(total_price) from pizza_sales.data)
+as decimal(10,2)) as PCT from pizza_sales.data
+group by pizza_size
+order by pizza_size;
+
+#F. Total Pizza sold By Pizza Category
+SELECT pizza_category, SUM(quantity) as Total_Quantity_Sold
+FROM pizza_sales.data
+GROUP BY pizza_category
+ORDER BY Total_Quantity_Sold DESC;
+
+#G. Top 5 Best Sellers by Total Pizzas Sold
+select pizza_name, sum(quantity) as Total_Pizza_Sold
+from pizza_sales.data
+group by pizza_name
+order by Total_Pizza_Sold desc limit 5;
+
+#H. Bottom 5 Sellers by Total Pizzas Sold
+select pizza_name, sum(quantity) as Total_Pizza_Sold
+from pizza_sales.data
+group by pizza_name
+order by Total_Pizza_Sold Asc limit 5;</code></pre>
+  </div>
+
+  <h2>🛠 Tools Used</h2>
+  <div class="chips"><span>SQL (MySQL)</span><span>Power BI</span><span>DAX</span><span>Data Visualization</span></div>
+
+  <h2>⭐ Key Features</h2>
+  <ul class="feat">
+    <li>Five headline KPIs</li>
+    <li>Daily and hourly order trends</li>
+    <li>Sales by pizza category and size</li>
+    <li>Top and bottom sellers</li>
+    <li>Busiest days and times summary</li>
+    <li>Date and category slicers</li>
+    <li>SQL queries behind every metric</li>
+  </ul>
+
+  <footer>© 2026 Darakhshan Zahid · Data Analyst</footer>
+</div>
+
+<div id="lb"><img id="lbimg" alt=""></div>
+<script>
+const lb=document.getElementById('lb'),li=document.getElementById('lbimg');
+document.querySelectorAll('.page img').forEach(i=>i.onclick=()=>{li.src=i.src;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+
+(function(){
+  var el=document.getElementById('code'),raw=el.textContent;
+  var re=/(#[^\n]*|--[^\n]*)|('(?:[^'\\]|\\.)*')|\b(select|from|group by|order by|limit|as|distinct|desc|asc|create|database|where|and|or)\b|\b(sum|count|cast|hour|dayname|str_to_date|decimal|avg|round)\b|(\b\d+(?:\.\d+)?\b)/gi;
+  el.innerHTML=raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(re,function(m,c,s,k,f,n){
+    var cls=c?'c':s?'s':k?'k':f?'f':'n';return '<span class="tk-'+cls+'">'+m+'</span>';});
+  var btn=document.getElementById('copyBtn');
+  btn.onclick=function(){
+    var done=function(){btn.textContent='Copied ✓';setTimeout(function(){btn.textContent='Copy code'},1600)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(raw).then(done,done)}
+    else{var ta=document.createElement('textarea');ta.value=raw;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done()}
+  };
+})();
+</script>
+</body>
+</html>
